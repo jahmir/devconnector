@@ -2,8 +2,9 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setAlert} from '../../actions/alert'
+import {register} from '../../actions/auth'
 
-const Register = ({setAlert}) => {
+const Register = ({setAlert, register}) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,7 +22,8 @@ const Register = ({setAlert}) => {
         if(password !== password2){
             setAlert('Password did not match', 'danger');
         }else{
-            console.log('SUCCESS');
+            register({ name, email, password });
+            setAlert('Register Success', 'success');
         }
     }
 
@@ -42,12 +44,14 @@ const Register = ({setAlert}) => {
         </div>
         <div className="form-group">
           <input
-            required
+            
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6" value={password}
+            required
+            value={password}
             onChange={e => onChange(e)}
+            minLength="6"
           />
         </div>
         <div className="form-group">
@@ -69,4 +73,9 @@ const Register = ({setAlert}) => {
     )
 }
 
-export default connect(null, {setAlert}) (Register)
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+{/* params guide connect (mapStateToprops, action) */}
+export default connect(mapStateToProps, {setAlert, register}) (Register)

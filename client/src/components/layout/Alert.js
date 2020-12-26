@@ -14,4 +14,5 @@ const mapStateToProps = state => ({
     alerts: state.alert
 })
 
+// params guide connect (mapStateToprops, action)
 export default connect(mapStateToProps) (Alert)
