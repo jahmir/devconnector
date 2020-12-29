@@ -77,5 +77,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 
-{/* params guide connect (mapStateToprops, action) */}
 export default connect(mapStateToProps, {setAlert, register}) (Register)
