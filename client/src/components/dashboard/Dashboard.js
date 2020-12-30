@@ -4,6 +4,9 @@ import { loadUser } from '../../actions/auth';
 import { getCurrentProfile} from '../../actions/profile'; 
 import Spinner from '../layout/Spinner';
 import {Link} from 'react-router-dom'
+import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}}) => {
 
@@ -15,10 +18,17 @@ const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}
     <Fragment>
         <h1 className='large text-primary'>Dashboard</h1>
         <p className="lead"><i className="fas fa-user"></i> Welcome {user && user.name}</p>
-        {profile !== null ? (<Fragment>has</Fragment>) : (<Fragment>
-            <p>Please setup your profile</p>
-            <Link to='/create-profile' className='btn-btn primary my-1'>Create Profile</Link>
-            </Fragment>)}
+        {profile !== null ? (
+                <Fragment>
+                    <DashboardActions/>
+                    <Experience experience = {profile.experience}/>
+                    <Education education = {profile.education} />
+                </Fragment>
+            ) : (
+                <Fragment>
+                    <p>Please setup your profile</p>
+                    <Link to='/create-profile' className='btn-btn primary my-1'>Create Profile</Link>
+                </Fragment>)}
     </Fragment>
 }
 
