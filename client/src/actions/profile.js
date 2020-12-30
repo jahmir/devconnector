@@ -28,11 +28,11 @@ export const createProfile = (formData, history, edit=false) => async dispatch =
         }
 
         const res = await axios.post('/api/profile', formData, config);
-        const data = await res.json(res)
+        
 
         dispatch({
             type: GET_PROFILE,
-            payload: data
+            payload: res.data
         })
 
         dispatch(setAlert(edit ? 'Profile updated': 'Profile created', 'success'));
