@@ -12,16 +12,16 @@ const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}
 
     useEffect(() => {
         getCurrentProfile();
-    }, [])
+    }, [getCurrentProfile])
 
-    return loading && profile === null ? <Spinner/> : 
+    return ( 
     <Fragment>
         <h1 className='large text-primary'>Dashboard</h1>
         <p className="lead"><i className="fas fa-user"></i> Welcome {user && user.name}</p>
         {profile !== null ? (
                 <Fragment>
                     <DashboardActions/>
-                    <Experience experience = {profile.experience}/>
+                    <Experience experience = {profile.experience} />
                     <Education education = {profile.education} />
                 </Fragment>
             ) : (
@@ -30,7 +30,7 @@ const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}
                     <Link to='/create-profile' className='btn-btn primary my-1'>Create Profile</Link>
                 </Fragment>)}
     </Fragment>
-}
+    )}
 
 const mapStateToProps = state => ({
     auth: state.auth,
