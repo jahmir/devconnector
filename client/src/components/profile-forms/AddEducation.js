@@ -3,21 +3,21 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addEducation } from "../../actions/profile";
 
-const AddEducation = ({addEducation, history}) => {
-    const [formData, setFormData] = useState({
-        school: '',
-        degree: '',
-        fieldofstudy: '',
-        from: '',
-        to: '',
-        current: false,
-        description: ''
-    })
+const AddEducation = ({ addEducation, history }) => {
+  const [formData, setFormData] = useState({
+    school: '',
+    degree: '',
+    fieldofstudy: '',
+    from: '',
+    to: '',
+    current: false,
+    description: ''
+  })
 
-    const [toDateDisabled, toggleDisabled] = useState(false);
-    const {school, degree, fieldofstudy, from, to, current, description} = formData;
+  const [toDateDisabled, toggleDisabled] = useState(false);
+  const { school, degree, fieldofstudy, from, to, current, description } = formData;
 
-    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   return (
     <Fragment>
@@ -27,33 +27,33 @@ const AddEducation = ({addEducation, history}) => {
       </p>
       <small>* = required field</small>
       <form class="form" onSubmit={e => {
-          e.preventDefault();
-          addEducation(formData, history)
+        e.preventDefault();
+        addEducation(formData, history)
       }}>
         <div class="form-group">
-          <input type="text" placeholder=" *School or Bootcamp" name="school" required value={school} onChange={e => onChange(e)}/>
+          <input type="text" placeholder=" *School or Bootcamp" name="school" required value={school} onChange={e => onChange(e)} />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="* Degree or Certificate" name="degree" required value={degree} onChange={e => onChange(e)}/>
+          <input type="text" placeholder="* Degree or Certificate" name="degree" required value={degree} onChange={e => onChange(e)} />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Field of Study" name="fieldofstudy" value={fieldofstudy} onChange={e => onChange(e)}/>
+          <input type="text" placeholder="Field of Study" name="fieldofstudy" value={fieldofstudy} onChange={e => onChange(e)} />
         </div>
         <div class="form-group">
           <h4>From Date</h4>
-          <input type="date" name="from" value={from} onChange={e => onChange(e)}/>
+          <input type="date" name="from" value={from} onChange={e => onChange(e)} />
         </div>
         <div class="form-group">
           <p>
             <input type="checkbox" name="current" checked={current} value={current} onChange={e => {
-                setFormData({...formData, current: !current});
-                toggleDisabled(!toDateDisabled);
-            }}/> Current Job
+              setFormData({ ...formData, current: !current });
+              toggleDisabled(!toDateDisabled);
+            }} /> Current
           </p>
         </div>
         <div class="form-group">
           <h4>To Date</h4>
-          <input type="date" name="to" value={to} onChange={e => onChange(e)} disabled={toDateDisabled ? 'disabled' : ''}/>
+          <input type="date" name="to" value={to} onChange={e => onChange(e)} disabled={toDateDisabled ? 'disabled' : ''} />
         </div>
         <div class="form-group">
           <textarea
@@ -73,4 +73,4 @@ const AddEducation = ({addEducation, history}) => {
   );
 };
 
-export default connect(null, { addEducation })(AddEducation);
+export default connect(null, { addEducation })(withRouter(AddEducation));
